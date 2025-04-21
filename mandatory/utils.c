@@ -13,17 +13,17 @@ long ft_atoi(char *str, int i)
     if(str[i] == '+' || str[i] == '-')
     i++;
     if(!str[i] || (str[i] < '0' && str[i] > '9'))
-        ft_error();
+        return(-1);
     while(str[i] >= '0' && str[i] <= '9')
     {
         res = res * 10 + (str[i] - '0');
         if (res > (LLONG_MAX / 10) || (res == (LLONG_MAX / 10) && (str[i] - '0') > LLONG_MAX % 10))
-            ft_error();
+            return(-1);
         i++;
     }
     if(str[i])
-    ft_error();
+    return(-1);
     if((res * sign) < INT_MIN || (res * sign) > INT_MAX)
-        ft_error();
+        return(-1);
     return(int)(sign *res);
 }
