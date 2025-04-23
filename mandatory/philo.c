@@ -37,6 +37,7 @@ int ft_time_proc(void *arg)
 }
 int ft_init(int ac, char **av, t_group *philo)
 {
+    philo->monitor = malloc(sizeof(pthread_t));
     philo->num_of_philo = ft_numbe_of_philo(av[1]);
     philo->time_to_die = ft_time_proc(av[2]);
     philo->time_to_eat = ft_time_proc(av[3]);
@@ -63,11 +64,7 @@ int ft_init(int ac, char **av, t_group *philo)
     }
     if(ac == 6)
         philo->num_time_to_eat = ft_nbtime_proc(av[5]);
-        return(0);
-}
-void ft_error(void)
-{
-    write(2, "error\n", 6);
+    return(0);
 }
 int main(int ac, char **av)
 {
@@ -77,18 +74,16 @@ int main(int ac, char **av)
         write(2, "wrong pass of arguments\n", 24);
         return (-1);
     }
-     ft_init(ac, av, &philo ); fork_mutex(&philo);
-    init_philo(&philo);
-    ft_destroypiw(&philo);
-}
-void ft_thread(t_group *arg)
-{
-    int i;
-
-    i = 0;
-    while(i < arg->num_of_philo)
+    if(ft_init(ac, av, &philo ) || fork_mutex(&philo))
     {
-        pthread_create(arg->philos->thread, NULL, */routine_daily*/, &arg->philos[i]);
-        i++;
+        write(2, "failed to create a thread\n", 26);
+        return(-1);
     }
+    init_philo(&philo);
+    ft_thread(&philo);
+    pthread_create(philo.monitor, NULL, monitor_death, &philo);
+    pthread_join(*philo.monitor, NULL);
+    ft_join(&philo);
+    ft_destroypiw(&philo);
+    free(philo.monitor);
 }

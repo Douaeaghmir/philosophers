@@ -27,3 +27,50 @@ long ft_atoi(char *str, int i)
         return(-1);
     return(int)(sign *res);
 }
+void ft_thread(t_group *arg)
+{
+    int i;
+
+    i = 0;
+    while(i < arg->num_of_philo)
+    {
+        if(pthread_create(&arg->philos[i].thread, NULL, routine_daily, &arg->philos[i])!= 0)
+        {
+            write(2, "failed to create the thread", 27);
+        }
+        i++;
+    }
+}
+void ft_join(t_group *arg)
+{
+    int i = 0;
+    while (i < arg->num_of_philo)
+    {
+        pthread_join(arg->philos[i].thread, NULL);
+        i++;
+    }
+}
+void *monitor_death(void *arg)
+{
+    t_group *info = (t_group *)arg;
+    while (!info->dead_flag)
+    {
+        for (int i = 0; i < info->num_of_philo; i++)
+        {
+            pthread_mutex_lock(info->meal_lock);
+            if ((time_cal() - info->philos[i].last_meal) > info->time_to_die)
+            {
+                pthread_mutex_lock(info->dead_lock);
+                info->dead_flag = 1;
+                printf("%ld %d died\n", time_cal() - info->philos[i].start_time, info->philos[i].id);
+                pthread_mutex_unlock(info->dead_lock);
+                pthread_mutex_unlock(info->meal_lock);
+                return NULL;
+            }
+            pthread_mutex_unlock(info->meal_lock);
+        }
+        usleep(1000);
+    }
+    return NULL;
+}
+
