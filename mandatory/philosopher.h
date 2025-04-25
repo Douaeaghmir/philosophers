@@ -58,5 +58,5 @@ void print_status(t_philo *philo, char *msg);
 pthread_mutex_t *t_mutex_alloc(void);
 void ft_join(t_group *arg);
 void *monitor_death(void *arg);
-
+int all_philos_full(t_group *group);
 #endif

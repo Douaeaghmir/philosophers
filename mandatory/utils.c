@@ -68,13 +68,21 @@ void *monitor_death(void *arg)
                 printf("%ld %d died\n", time_cal() - info->philos[i].start_time, info->philos[i].id);
                 pthread_mutex_unlock(info->dead_lock);
                 pthread_mutex_unlock(info->meal_lock);
-                return NULL;
+                return (NULL);
             }
             pthread_mutex_unlock(info->meal_lock);
             i++;
         }
+        if (info->num_time_to_eat > 0 && all_philos_full(info))
+        {
+            pthread_mutex_lock(info->dead_lock);
+            info->dead_flag = 1;
+            pthread_mutex_unlock(info->dead_lock);
+            return (NULL);
+        }
         usleep(1000);
     }
-    return NULL;
+    return (NULL);
 }
+
 

@@ -10,3 +10,17 @@ pthread_mutex_t *t_mutex_alloc(void)
         return(NULL);
     return(info);
 }
+int all_philos_full(t_group *group)
+{
+    int i;
+    int full = 0;
+
+    i = 0;
+    while (i < group->num_of_philo)
+    {
+        if (group->philos[i].counter_meal >= group->num_time_to_eat)
+            full++;
+        i++;
+    }
+    return (full == group->num_of_philo);
+}
