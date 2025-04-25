@@ -73,4 +73,3 @@ void *monitor_death(void *arg)
     }
     return NULL;
 }
-

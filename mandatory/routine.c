@@ -4,7 +4,7 @@ void *routine_daily(void *arg)
     t_philo *philo = (t_philo *)arg;
     if(philo->id % 2 == 0)
         usleep(1000);
-    while(1)
+    while(!philo->group->dead_flag)
     {
         philo_eat(philo);
         usleep(100);
