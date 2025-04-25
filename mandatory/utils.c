@@ -53,9 +53,12 @@ void ft_join(t_group *arg)
 void *monitor_death(void *arg)
 {
     t_group *info = (t_group *)arg;
+    int i;
+
     while (!info->dead_flag)
     {
-        for (int i = 0; i < info->num_of_philo; i++)
+        i = 0;
+        while (i < info->num_of_philo)
         {
             pthread_mutex_lock(info->meal_lock);
             if ((time_cal() - info->philos[i].last_meal) > info->time_to_die)
@@ -68,8 +71,10 @@ void *monitor_death(void *arg)
                 return NULL;
             }
             pthread_mutex_unlock(info->meal_lock);
+            i++;
         }
         usleep(1000);
     }
     return NULL;
 }
+
