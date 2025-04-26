@@ -3,9 +3,9 @@ int ft_numbe_of_philo(void *arg)
 {
     int n;
 
-    n = ft_atoi(arg,0);
     if(!arg)
         return(-1);
+    n = ft_atoi(arg,0);
     if(n <= 0) 
         return(-1);
     return(n);
@@ -14,9 +14,9 @@ int ft_nbtime_proc(void *arg)
 {
     int nb;
 
-    nb = ft_atoi(arg, 0);
     if(!arg)
         return(-1);
+    nb = ft_atoi(arg, 0);
     if( nb < 0)
     {
         write(2, "philo is starving\n", 18);
@@ -28,9 +28,9 @@ int ft_time_proc(void *arg)
 {
     int tm;
 
-    tm = ft_atoi(arg, 0);
     if(!arg)
         return(-1);
+    tm = ft_atoi(arg, 0);
     if(tm < 0)
         return(-1);
     return(tm);

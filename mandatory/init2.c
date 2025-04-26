@@ -43,14 +43,6 @@ void own_free(void **arg)
 
 void ft_destroypiw(t_group *info)
 {
-    int i;
-
-    i = 0;
-    while(i < info->num_of_philo)
-    {
-        pthread_mutex_destroy(&info->forks[i]);
-        i++;
-    }
     pthread_mutex_destroy(info->write_lock);
     pthread_mutex_destroy(info->meal_lock);
     pthread_mutex_destroy(info->dead_lock);
