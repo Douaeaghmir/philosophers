@@ -76,8 +76,8 @@ int main(int ac, char **av)
     }
     if(ft_init(ac, av, &philo ) || fork_mutex(&philo))
     {
-        write(2, "failed to create a thread\n", 26);
         return(-1);
+        write(2, "failed to create a thread\n", 26);
     }
     init_philo(&philo);
     ft_thread(&philo);

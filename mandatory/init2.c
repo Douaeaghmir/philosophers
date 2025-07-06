@@ -1,9 +1,9 @@
 #include "philosopher.h"
 int fork_mutex(t_group *nb)
 {
-    nb->dead_lock = t_mutex_alloc();
-    nb->meal_lock = t_mutex_alloc();
-    nb->write_lock = t_mutex_alloc();
+    pthread_mutex_init(&nb->dead_lock, NULL);
+    pthread_mutex_init(&nb->meal_lock, NULL);
+    pthread_mutex_init(&nb->write_lock, NULL);
     int i;
     nb->forks = malloc(sizeof(pthread_mutex_t) * nb->num_of_philo);
     if(!nb->forks)
@@ -43,12 +43,9 @@ void own_free(void **arg)
 
 void ft_destroypiw(t_group *info)
 {
-    pthread_mutex_destroy(info->write_lock);
-    pthread_mutex_destroy(info->meal_lock);
-    pthread_mutex_destroy(info->dead_lock);
+    pthread_mutex_destroy(&info->write_lock);
+    pthread_mutex_destroy(&info->meal_lock);
+    pthread_mutex_destroy(&info->dead_lock);
     free(info->forks);
     free(info->philos);
-    free(info->write_lock);
-    free(info->dead_lock);
-    free(info->meal_lock);
 }

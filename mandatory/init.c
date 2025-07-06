@@ -25,12 +25,12 @@ long time_cal(void)
 }
 void print_status(t_philo *philo, char *msg)
 {
-    pthread_mutex_lock(philo->group->dead_lock);
+    pthread_mutex_lock(&philo->group->dead_lock);
     if (!philo->group->dead_flag)
     {
-        pthread_mutex_lock(philo->group->write_lock);
+        pthread_mutex_lock(&philo->group->write_lock);
         printf("%ld %d %s\n", time_cal() - philo->start_time, philo->id, msg);
-        pthread_mutex_unlock(philo->group->write_lock);
+        pthread_mutex_unlock(&philo->group->write_lock);
     }
-    pthread_mutex_unlock(philo->group->dead_lock);
+    pthread_mutex_unlock(&philo->group->dead_lock);
 }
