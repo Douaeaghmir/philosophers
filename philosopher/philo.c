@@ -6,17 +6,20 @@ int ft_numbe_of_philo(void *arg)
     if(!arg)
         return(-1);
     n = ft_atoi(arg,0);
+
+    // pause();
     if(n <= 0) 
         return(-1);
     return(n);
 }
-int ft_nbtime_proc(void *arg)
+int ft_nbtime_proc(char *arg)
 {
     int nb;
 
     if(!arg)
         return(-1);
     nb = ft_atoi(arg, 0);
+
     if( nb < 0)
     {
         write(2, "philo is starving\n", 18);
@@ -31,6 +34,7 @@ int ft_time_proc(void *arg)
     if(!arg)
         return(-1);
     tm = ft_atoi(arg, 0);
+
     if(tm < 0)
         return(-1);
     return(tm);
@@ -64,20 +68,23 @@ int ft_init(int ac, char **av, t_group *philo)
     }
     if(ac == 6)
         philo->num_time_to_eat = ft_nbtime_proc(av[5]);
+    if(philo->num_time_to_eat < 0)
+        return 1;
     return(0);
 }
 int main(int ac, char **av)
 {
     t_group philo;
-    if( ac != 5 && ac != 6)
+    if(ac != 5 && ac != 6)
     {
         write(2, "wrong pass of arguments\n", 24);
         return (-1);
     }
-    if(ft_init(ac, av, &philo ) || fork_mutex(&philo))
+    if(ft_init(ac, av, &philo) || fork_mutex(&philo))
     {
-        return(-1);
+        free(philo.monitor);
         write(2, "failed to create a thread\n", 26);
+        return(-1);
     }
     init_philo(&philo);
     ft_thread(&philo);

@@ -50,7 +50,7 @@ void philo_eat(t_philo *philo);
 void philo_think(t_philo *philo);
 void philo_sleep(t_philo *philo);
 int ft_numbe_of_philo(void *arg);
-int ft_nbtime_proc(void *arg);
+int ft_nbtime_proc(char *arg);
 int ft_time_proc(void *arg);
 int ft_init(int ac, char **av, t_group *philo);
 void ft_thread(t_group *arg);
