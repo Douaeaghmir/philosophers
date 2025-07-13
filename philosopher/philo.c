@@ -6,8 +6,6 @@ int ft_numbe_of_philo(void *arg)
     if(!arg)
         return(-1);
     n = ft_atoi(arg,0);
-
-    // pause();
     if(n <= 0) 
         return(-1);
     return(n);
@@ -34,7 +32,6 @@ int ft_time_proc(void *arg)
     if(!arg)
         return(-1);
     tm = ft_atoi(arg, 0);
-
     if(tm < 0)
         return(-1);
     return(tm);

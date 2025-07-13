@@ -11,9 +11,9 @@ long ft_atoi(char *str, int i)
     if(str[i] == '-')
         sign = -1;
     if(str[i] == '+' || str[i] == '-')
-    i++;
+        i++;
     if(!str[i] || (str[i] < '0' || str[i] > '9'))
-            return(-1);
+        return(-1);
     while(str[i] >= '0' && str[i] <= '9')
     {
         res = res * 10 + (str[i] - '0');
@@ -22,7 +22,7 @@ long ft_atoi(char *str, int i)
         i++;
     }
     if(str[i])
-    return(-1);
+        return(-1);
     if((res * sign) < INT_MIN || (res * sign) > INT_MAX)
         return(-1);
     return(int)(sign *res);
@@ -35,9 +35,7 @@ void ft_thread(t_group *arg)
     while(i < arg->num_of_philo)
     {
         if(pthread_create(&arg->philos[i].thread, NULL, routine_daily, &arg->philos[i])!= 0)
-        {
             write(2, "failed to create the thread", 27);
-        }
         i++;
     }
 }
