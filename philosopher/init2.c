@@ -14,9 +14,12 @@ int fork_mutex(t_group *nb)
         pthread_mutex_init(&nb->forks[i], NULL);
         i++;
     }
-    nb->philos = malloc(sizeof(t_philo) * nb->num_of_philo);
+    nb->philos = NULL;
         if(!nb->philos)
+        {
+            free(nb->forks);
             return(1);
+        }
         return(0);
 }
 

@@ -69,9 +69,14 @@ int ft_init(int ac, char **av, t_group *philo)
         return 1;
     return(0);
 }
+void f()
+{
+    system("leaks philo");
+}
 int main(int ac, char **av)
 {
     t_group philo;
+    atexit(f);
     if(ac != 5 && ac != 6)
     {
         write(2, "wrong pass of arguments\n", 24);
