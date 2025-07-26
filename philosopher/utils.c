@@ -81,6 +81,4 @@ void *monitor_death(void *arg)
         usleep(500);
     }
     return (NULL);
-}
-
-
+} 
