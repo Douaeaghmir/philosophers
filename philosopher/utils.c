@@ -78,7 +78,7 @@ void *monitor_death(void *arg)
             pthread_mutex_unlock(&info->dead_lock);
             return (NULL);
         }
-        usleep(1000);
+        usleep(500);
     }
     return (NULL);
 }

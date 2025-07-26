@@ -58,4 +58,6 @@ void print_status(t_philo *philo, char *msg);
 void ft_join(t_group *arg);
 void *monitor_death(void *arg);
 int all_philos_full(t_group *group);
+int check_flag(t_philo *arg);
+void ft_usleep(long time, t_philo *arg);
 #endif
