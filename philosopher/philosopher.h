@@ -6,7 +6,7 @@
 /*   By: doaghmir <doaghmir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 00:19:18 by doaghmir          #+#    #+#             */
-/*   Updated: 2025/07/27 02:01:45 by doaghmir         ###   ########.fr       */
+/*   Updated: 2025/07/27 02:34:48 by doaghmir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,7 @@ int						check_all_philos(t_group *info);
 int						check_philo_died(t_group *info, int i);
 int						ft_strlen(char *msg);
 int						check_all_philos(t_group *info);
+void					lock_forks(t_philo *philo);
+void					unlock_forks(t_philo *philo);
+void					philo_one_fork(t_philo *philo);
 #endif
