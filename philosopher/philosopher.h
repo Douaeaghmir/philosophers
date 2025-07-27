@@ -1,63 +1,82 @@
-#ifndef PHILOSOPHER_H
-#define PHILOSOPHER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doaghmir <doaghmir@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/27 00:19:18 by doaghmir          #+#    #+#             */
+/*   Updated: 2025/07/27 02:01:45 by doaghmir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <unistd.h>
-#include <pthread.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <sys/time.h>
-typedef struct s_group t_group;
+#ifndef PHILOSOPHER_H
+# define PHILOSOPHER_H
+
+# include <limits.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
+
+typedef struct s_group	t_group;
 typedef struct s_philo
 {
-	pthread_t		thread;
-	int				id;
-	int				eating_flag;
-	int				counter_meal;
+	pthread_t			thread;
+	int					id;
+	int					eating_flag;
+	int					counter_meal;
 	long				start_time;
 	long				last_meal;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-    t_group         *group;
-}					t_philo;
+	pthread_mutex_t		*r_fork;
+	pthread_mutex_t		*l_fork;
+	t_group				*group;
+}						t_philo;
 
 typedef struct s_group
 {
-	int				num_of_philo;
-	int				num_time_to_eat;
+	int					num_of_philo;
+	int					num_time_to_eat;
 	long				time_to_die;
 	long				time_to_eat;
-	long				time_to_sleep;			
-	int				dead_flag;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	write_lock;
-	pthread_mutex_t	*forks;
-	t_philo			*philos;
-	pthread_t	 *monitor;
-}					t_group;
-long ft_atoi(char *str, int i);
-void ft_error(void);
-int fork_mutex(t_group *nb);
-void init_philo(t_group *info );
-void ft_destroypiw(t_group *info);
-long time_cal(void);
-void own_free(void **arg);
-void ft_free(pthread_mutex_t *fork, int i);
-void *routine_daily(void *arg);
-void philo_eat(t_philo *philo);
-void philo_think(t_philo *philo);
-void philo_sleep(t_philo *philo);
-int ft_numbe_of_philo(void *arg);
-int ft_nbtime_proc(char *arg);
-int ft_time_proc(void *arg);
-int ft_init(int ac, char **av, t_group *philo);
-void ft_thread(t_group *arg);
-void print_status(t_philo *philo, char *msg);
-void ft_join(t_group *arg);
-void *monitor_death(void *arg);
-int all_philos_full(t_group *group);
-int check_flag(t_philo *arg);
-void ft_usleep(long time, t_philo *arg);
+	long				time_to_sleep;
+	int					dead_flag;
+	pthread_mutex_t		dead_lock;
+	pthread_mutex_t		meal_lock;
+	pthread_mutex_t		write_lock;
+	pthread_mutex_t		*forks;
+	t_philo				*philos;
+	pthread_t			*monitor;
+}						t_group;
+long					ft_atoi(char *str, int i, long res);
+void					ft_error(void);
+int						fork_mutex(t_group *nb);
+void					init_philo(t_group *info);
+void					ft_destroypiw(t_group *info);
+long					time_cal(void);
+void					own_free(void **arg);
+void					ft_free(pthread_mutex_t *fork, int i);
+void					*routine_daily(void *arg);
+void					philo_eat(t_philo *philo);
+void					philo_think(t_philo *philo);
+void					philo_sleep(t_philo *philo);
+int						ft_numbe_of_philo(void *arg);
+int						ft_nbtime_proc(char *arg);
+int						ft_time_proc(void *arg);
+int						ft_init(int ac, char **av, t_group *philo);
+void					ft_thread(t_group *arg);
+void					print_status(t_philo *philo, char *msg);
+void					ft_join(t_group *arg);
+void					*monitor_death(void *arg);
+int						all_philos_full(t_group *group);
+int						check_flag(t_philo *arg);
+void					ft_usleep(long time, t_philo *arg);
+int						ft_strlen(char *msg);
+int						ft_check_value(int value, char *msg);
+int						check_all_philos(t_group *info);
+int						check_philo_died(t_group *info, int i);
+int						ft_strlen(char *msg);
+int						check_all_philos(t_group *info);
 #endif
