@@ -6,7 +6,7 @@
 /*   By: doaghmir <doaghmir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 00:19:22 by doaghmir          #+#    #+#             */
-/*   Updated: 2025/07/27 02:02:17 by doaghmir         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:08:05 by doaghmir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_join(t_group *arg)
 
 int	check_philo_died(t_group *info, int i)
 {
-	if ((time_cal() - info->philos[i].last_meal) > info->time_to_die)
+	if ((time_cal() - info->philos[i].last_meal) >= info->time_to_die)
 	{
 		pthread_mutex_lock(&info->dead_lock);
 		info->dead_flag = 1;
@@ -97,7 +97,7 @@ void	*monitor_death(void *arg)
 			pthread_mutex_unlock(&info->dead_lock);
 			return (NULL);
 		}
-		usleep(500);
+		usleep(50);
 	}
 	return (NULL);
 }

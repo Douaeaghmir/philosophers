@@ -6,7 +6,7 @@
 /*   By: doaghmir <doaghmir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 00:19:14 by doaghmir          #+#    #+#             */
-/*   Updated: 2025/07/27 01:43:00 by doaghmir         ###   ########.fr       */
+/*   Updated: 2025/08/11 18:41:31 by doaghmir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	ft_init(int ac, char **av, t_group *philo)
 {
 	philo->monitor = malloc(sizeof(pthread_t));
+	if (!philo->monitor)
+		return (1);
 	philo->num_of_philo = ft_numbe_of_philo(av[1]);
 	philo->time_to_die = ft_time_proc(av[2]);
 	philo->time_to_eat = ft_time_proc(av[3]);
