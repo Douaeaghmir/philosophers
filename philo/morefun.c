@@ -14,20 +14,10 @@
 
 void	lock_forks(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-	{
 		pthread_mutex_lock(philo->l_fork);
 		print_status(philo, "has taken a fork");
 		pthread_mutex_lock(philo->r_fork);
 		print_status(philo, "has taken a fork");
-	}
-	else
-	{
-		pthread_mutex_lock(philo->r_fork);
-		print_status(philo, "has taken a fork");
-		pthread_mutex_lock(philo->l_fork);
-		print_status(philo, "has taken a fork");
-	}
 }
 
 void	unlock_forks(t_philo *philo)
