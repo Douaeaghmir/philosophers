@@ -31,7 +31,7 @@ int	ft_nbtime_proc(char *arg)
 	if (!arg)
 		return (-1);
 	nb = ft_atoi(arg, 0, 0);
-	if (nb < 0)
+	if (nb <= 0)
 	{
 		write(2, "philo is starving\n", 18);
 		return (-1);
